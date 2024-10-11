@@ -3,13 +3,14 @@ import './LoginPopup.css'
 import { assets } from '../../assets/assets'
 
 const LoginPopup = ({ nesetShowLogin }) => {
-    const [currState, setCurrState] = useState("Sign Up")
+    const [currState, setCurrState] = useState("Log In")
     return (
         <div className='login-popup'>
-            <form className="login-popop-containner">
-                <h2>{currState}</h2>
-                <img onClick={() => nesetShowLogin(false)} src={assets.cross_icon} alt="" />
-
+            <form className="login-popup-container">
+                <div className="login-popup-title">
+                    <h2>{currState}</h2>
+                    <img onClick={() => nesetShowLogin(false)} src={assets.cross_icon} alt="" />
+                </div>
                 <div className="login-popup-inputs">
                     {currState === "Sign Up" ? <input type="text" placeholder='Your name' required /> : <></>}
                     <input type="email" placeholder='Your Email' required />
