@@ -3,8 +3,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    position: fixed;  /* Change from relative to fixed */
+    top: 0;  /* Stick to the top */
+    left: 0; /* Ensure it starts from the left */
+    width: 100%;
+    z-index: 99;
+    background-color: white;
+    padding-right: 40px;
+    padding-left: 40px;
 }
+
 
 .navbar.logo {
     width: 150px;

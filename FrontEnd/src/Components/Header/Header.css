@@ -5,6 +5,7 @@
     background: url('/header_img.png') no-repeat;
     background-size: contain;
     position: relative;
+    margin-top: 94px;
 }
 
 .header-contents

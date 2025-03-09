@@ -42,6 +42,20 @@
     width: 40px;
     margin-right: 15px;
 }
+.res-location {
+    width: 100%; /* Ensure it takes full width */
+    display: flex;
+    justify-content: center; /* Center the map */
+}
+
+.res-location .map {
+    width: 100%; /* Ensure it takes full width */
+    max-width: 100vw; /* Prevent overflow issues */
+    height: 400px; /* Increase the height */
+    border: none; /* Remove iframe border */
+    border-radius: 10px; /* Optional rounded corners */
+}
+
 
 .footer hr{
     width: 100%;
