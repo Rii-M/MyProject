@@ -11,6 +11,7 @@
     background-color: white;
     padding-right: 40px;
     padding-left: 40px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -56,15 +57,26 @@
     cursor: pointer;
 }
 
+.navbar-search-icon {
+    position: relative; /* Ensures dot is positioned relative to this */
+    display: inline-block;
+}
+
+.navbar-search-icon img {
+    width: 24px; /* Adjust if necessary */
+}
+
 .navbar-search-icon .dot {
     position: absolute;
     min-width: 10px;
     min-height: 10px;
     background-color: tomato;
-    border-radius: 5px;
-    top: 24px;
-    right: 340px;
+    border-radius: 50%;
+    top: -5px; /* Adjusted to move above the icon */
+    right: -5px; /* Adjusted to move to the right edge */
+    border: 2px solid white; /* Optional: Adds a border to separate the dot from the icon */
 }
+
 
 .navbar-profile {
     position: relative;
