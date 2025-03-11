@@ -11,7 +11,7 @@ const Add = ({url}) => {
     name:"",
     description:"",
     price:"",
-    category:"Salad"
+    category:"Mo:mo"
   })
 
 
@@ -41,7 +41,7 @@ const onSubmitHandler=async(event)=>{
         name:"",
         description:"",
         price:"",
-        category:"Salad"
+        category:"Mo:mo"
       }
     )
     setImage(false);
@@ -81,20 +81,20 @@ const onSubmitHandler=async(event)=>{
                 <div className="add-category flex-col">
                     <p>Product category</p>
                     <select onChange={onChangeHandler} name="category">
-                      <option value="Salad">Salad</option>
+                      <option value="Mo:mo">Mo:mo</option>
+                      <option value="Burger">Burger</option>
+                      <option value="Biryani">Biryani</option>
                       <option value="Rolls">Rolls</option>
-                      <option value="Deserts">Deserts</option>
-                      <option value="Sandwich">Sandwich</option>
-                      <option value="Cake">Cake</option>
-                      <option value="Pure Veg">Pure Veg</option>
-                      <option value="Pasta">Pasta</option>
-                      <option value="Noodles">Noodles</option>  
+                      <option value="Pizza">Pizza</option>
+                      <option value="Desert">Desert</option>
+                      <option value="Drinks">Drinks</option>
+                      <option value="Pure Veg">Pure Veg</option>  
                     </select>
                 </div>
 
                 <div className="add-price flex-col">
                     <p>Product price</p>
-                    <input onChange={onChangeHandler} value={data.price} type="Number" name='price' placeholder='$20' />
+                    <input onChange={onChangeHandler} value={data.price} type="Number" name='price' placeholder='Rs.' />
                 </div>
             </div>
 
