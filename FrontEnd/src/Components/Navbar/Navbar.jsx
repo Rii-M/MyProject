@@ -1,13 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './Navbar.css';
 import { assets } from '../../assets/assets';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext';
 
 const Navbar = ({ esetShowLogin }) => {
   const [activeSection, setActiveSection] = useState('');
   const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const logout = () => {
     localStorage.removeItem('token');
@@ -15,17 +16,42 @@ const Navbar = ({ esetShowLogin }) => {
     navigate('/');
   };
 
-  // Function to handle smooth scrolling
+  // Function to handle smooth scrolling or navigation to home page first
   const handleScrollToSection = (e, sectionId) => {
     e.preventDefault();
-    const section = document.getElementById(sectionId);
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop - 80, // Adjust for fixed navbar height
-        behavior: 'smooth',
-      });
+    
+    if (location.pathname !== '/') {
+      // Redirect to home with a query parameter to scroll after navigation
+      navigate(`/?scrollTo=${sectionId}`);
+    } else {
+      // Scroll to section if already on home page
+      const section = document.getElementById(sectionId);
+      if (section) {
+        window.scrollTo({
+          top: section.offsetTop - 80, // Adjust for navbar height
+          behavior: 'smooth',
+        });
+      }
     }
   };
+
+  // Handle scrolling after navigating from another page
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const sectionId = params.get('scrollTo');
+
+    if (sectionId) {
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          window.scrollTo({
+            top: section.offsetTop - 80,
+            behavior: 'smooth',
+          });
+        }
+      }, 100); // Small delay to ensure the section is rendered
+    }
+  }, [location]);
 
   // Function to update the active section on scroll
   useEffect(() => {
@@ -58,10 +84,10 @@ const Navbar = ({ esetShowLogin }) => {
   return (
     <div className="navbar">
       <Link to="/">
-        <img src={assets.logo} alt="" className="logo" />
+        <img src={assets.logo} alt="" className="logos" />
       </Link>
       <ul className="navbar-menu">
-        <a href="/" onClick={(e) => handleScrollToSection(e, 'home')} className={activeSection === 'home' ? 'active' : ''}>
+        <a href="#home" onClick={(e) => handleScrollToSection(e, 'home')} className={activeSection === 'home' ? 'active' : ''}>
           home
         </a>
         <a href="#explore-menu" onClick={(e) => handleScrollToSection(e, 'explore-menu')} className={activeSection === 'explore-menu' ? 'active' : ''}>
