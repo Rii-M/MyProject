@@ -58,7 +58,7 @@ const Navbar = ({ esetShowLogin }) => {
     const sections = ['explore-menu', 'app-download', 'footer'];
     
     const handleScroll = () => {
-      let closestSection = 'home'; // Default to home if no section is in view
+      let closestSection = ''; // Default to home if no section is in view
       let minDistance = window.innerHeight; 
 
       sections.forEach((sectionId) => {
@@ -101,7 +101,7 @@ const Navbar = ({ esetShowLogin }) => {
         </a>
       </ul>
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="" />
+        {/* <img src={assets.search_icon} alt="" /> */}
         <div className="navbar-search-icon">
           <Link to="/cart">
             <img src={assets.basket_icon} alt="" />
@@ -114,7 +114,7 @@ const Navbar = ({ esetShowLogin }) => {
           <div className="navbar-profile">
             <img src={assets.profile_icon} alt="" />
             <ul className="nav-profile-dropdown">
-              <li>
+              <li  onClick={()=>navigate('/myorders')}>
                 <img src={assets.bag_icon} alt="" />
                 <p>Orders</p>
               </li>

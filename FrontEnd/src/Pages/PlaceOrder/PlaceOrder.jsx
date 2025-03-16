@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './PlaceOrder.css'
 import { StoreContext } from '../../context/StoreContext'
 import axios from 'axios'
@@ -15,9 +15,9 @@ const PlaceOrder = () => {
     email:"",
     street:"",
     city:"",
-    state:"",
-    zipcode:"",
-    country:"",
+    // state:"",
+    // zipcode:"",
+    // country:"",
     phone:""
   })
 
@@ -57,7 +57,7 @@ const PlaceOrder = () => {
         window.location.href = response.data.session_url; // Redirecting to success URL
       } else {
         console.log("Error in response:", response.data);
-        alert("Payment could not be processed. Redirecting to order verification...");
+        alert("Payment could not be processed.Please login");
         window.location.href = `http://localhost:5173/verify?success=false&orderId=${response.data.orderId || ''}`;
       }
     } catch (error) {
@@ -67,6 +67,20 @@ const PlaceOrder = () => {
     }
     
   }
+
+  //after myorder so that it won't be visble when logged in
+  const navigate = useNavigate();
+  useEffect(()=>{
+    if (!token) {
+      navigate('/cart')
+      alert('Please Login')
+    }
+    else if(getTotalCartAmount()==0)
+    {
+      navigate('/cart ')
+      alert("No items in the cart. Add to cart")
+    }
+  },[token])
  
   return (
     <form onSubmit={placeOrder} className="place-order">
@@ -77,14 +91,14 @@ const PlaceOrder = () => {
           <input required name='lastName' onChange={onChangeHandler} value={data.lastName} type="text" placeholder='Last Name'/>
         </div>
         <input required name='email' onChange={onChangeHandler} value={data.email} type="email" placeholder='Email' />
-        {/* <input required name='street' onChange={onChangeHandler} value={data.street} type="text" placeholder='Street' /> */}
+        <input required name='street' onChange={onChangeHandler} value={data.street} type="text" placeholder='Street' />
         <div className="multi-fields">
           <input required name='city' onChange={onChangeHandler} value={data.city} type="text" placeholder='City' />
           {/* <input required name='state' onChange={onChangeHandler} value={data.state} type="text" placeholder='State'/> */}
         </div>
         <div className="multi-fields">
           {/* <input required name='zipcode' onChange={onChangeHandler} value={data.zipcode} type="text" placeholder='Zip Code' /> */}
-          <input required name='country' onChange={onChangeHandler} value={data.country} type="text" placeholder='Country'/>
+          {/* <input required name='country' onChange={onChangeHandler} value={data.country} type="text" placeholder='Country'/> */}
         </div>
         <input required name='phone' onChange={onChangeHandler} value={data.phone} type="integer" placeholder='Phone' />
       </div>
